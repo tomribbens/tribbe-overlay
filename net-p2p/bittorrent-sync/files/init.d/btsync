@@ -12,11 +12,14 @@ SYNC_PIDFILE="/var/run/btsync/${SYNC_NAME}.pid"
 [ -z "${SYNC_USER}" ] && SYNC_USER="btsync"
 
 
+start_pre() {
+	# Ensure the PID file directory exists and is writable
+	checkpath --owner ${SYNC_USER}:btsync --mode 0775 --dir /var/run/btsync/
+}
+
 start() {
 	ebegin "Starting ${NAME}"
 
-	# Sets the umask for the process so that btsync creates files
-	# with group write permissions
 	start-stop-daemon --start --exec "${SYNC_BINARY}" \
 	   --pidfile "${SYNC_PIDFILE}" --background \
 	   --umask "${SYNC_UMASK}" --user "${SYNC_USER}" \

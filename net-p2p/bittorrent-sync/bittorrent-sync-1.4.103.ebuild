@@ -44,7 +44,7 @@ pkg_postinst() {
 	# Let's set up the user and group for this daemon so that members of the group
 	# can have write permissions.
 	enewgroup "${syncuser}"
-	enewuser "${syncuser}" -1 /bin/bash "${syncdir}" "${syncuser}"
+	enewuser "${syncuser}" -1 -1 "${syncdir}" "${syncuser}"
 
 	# Create the .sync directory where sync metadata will be stored
 	mkdir "${syncdir}/.sync"
@@ -54,10 +54,6 @@ pkg_postinst() {
 
 	# Fix .sync directory ownership
 	chown ${syncuser}:${syncuser} "${syncdir}/.sync"
-
-	# Create /var/run/btsync/ and fix permissions, to enable to fall back to unprivileged user
-	mkdir "/var/run/btsync/"
-	chown ${syncuser}:${syncuser} "/var/run/btsync/"
 
 	elog "In order for shared files between local users to be as easy as possible,"
 	elog "please set up ACLs on your system."
