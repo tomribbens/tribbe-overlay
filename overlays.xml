@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE repositories SYSTEM "/dtd/repositories.dtd">
+<repositories xmlns="" version="1.0">
+<repo quality="experimental" status="unofficial">
+        <name>tribbe-overlay</name>
+        <description>Miscellaneous ebuilds and masks/unmasks</description>
+        <homepage>http://github.com/tomribbens/tribbe-overlay</homepage>
+        <owner type="person">
+                <email>tom@tomribbens.be</email>
+                <name>Tom Ribbens</name>
+        </owner>
+        <source type="git">https://github.com/tomribbens/tribbe-overlay.git</source>
+        <feed>https://github.com/tomribbens/tribbe-overlay/commits/master.atom</feed>
+</repo>
+</repositories>

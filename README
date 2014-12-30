@@ -1,0 +1,48 @@
+TRIBBE-OVERLAY(8)                                              TRIBBE-OVERLAY(8)
+
+
+
+NAME
+       tribbe-overlay - overlay for Gentoo Linux used by Tom Ribbens
+
+DESCRIPTION
+       This  overlay is used for personal hacking of Gentoo Linux: addition of
+       unofficial/unsupported ebuilds, masking/unmasking according to personal
+       preferences and so on.
+
+INSTALLATION
+       Installation  is  rather  simple: all you have to do is to register new
+       overlay in your system. Additonally, you may want to  add  symlinks  to
+       Documentation/package.{keywords,mask,unmask}/*.
+
+   Installation via layman
+       You will need app-portage/layman installed:
+       emerge -avq app-portage/layman
+
+       tribbe-overlay  isn't  in  the  official  overlays list - just add over-
+       lays.xml from the root of tribbe-overlay:
+       layman   -o    https://github.com/tomribbens/tribbe-overlay/raw/master/over-
+       lays.xml -a tribbe-overlay
+       Layman   may   ignore  '--overlay'  option.  Workaround:  you  can  add
+       https://github.com/tomribbens/tribbe-overlay/raw/master/overlays.xml      to
+       'overlays'  section  in  /etc/layman/layman.cfg and refetch overlays to
+       put them to layman's cache.
+
+       Don't  forget  to  add  'source   /var/lib/layman/make.conf'   to   the
+       /etc/make.conf
+
+   Manual installation
+       Go to wherever you want to place overlays:
+       mkdir -p /var/lib/my_overlays
+       cd /var/lib/my_overlays
+
+       Clone git repository.
+       git clone https://github.com/tomribbens/tribbe-overlay.git
+
+       Register overlay in PORTDIR_OVERLAY in the /etc/make.conf.
+       PORTDIR_OVERLAY="$PORTDIR_OVERLAY /var/lib/my_overlays/tribbe-overlay"
+
+
+
+
+                                                              TRIBBE-OVERLAY(8)
