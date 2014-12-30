@@ -1,0 +1,44 @@
+#!/sbin/runscript
+
+# Copyright 2013-2014 Jonathan Vasquez <jvasquez1011@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+NAME="BitTorrent Sync"
+SYNC_NAME=${RC_SVCNAME}
+SYNC_BINARY="/opt/btsync/btsync"
+SYNC_OPTS="${SYNC_OPTS} --nodaemon --config /etc/btsync/${SYNC_NAME}.conf"
+SYNC_PIDFILE="/var/run/btsync/${SYNC_NAME}.pid"
+[ -z "${SYNC_UMASK}" ] && SYNC_UMASK="022"
+[ -z "${SYNC_USER}" ] && SYNC_USER="btsync"
+
+
+start() {
+	ebegin "Starting ${NAME}"
+
+	# Sets the umask for the process so that btsync creates files
+	# with group write permissions
+	start-stop-daemon --start --exec "${SYNC_BINARY}" \
+	   --pidfile "${SYNC_PIDFILE}" --background \
+	   --umask "${SYNC_UMASK}" --user "${SYNC_USER}" \
+	   -- ${SYNC_OPTS}
+
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping ${NAME}"
+
+	start-stop-daemon --stop --exec "${SYNC_BINARY}" \
+	    --pidfile "${SYNC_PIDFILE}"
+
+	eend $?
+}
+
+reload() {
+	ebegin "Reloading ${NAME}"
+
+	start-stop-daemon --signal HUP --exec "${SYNC_BINARY}" \
+	    --pidfile "${SYNC_PIDFILE}"
+
+	eend $?
+}

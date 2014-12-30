@@ -1,0 +1,9 @@
+# pass any parameters to btsync
+# this is expanded with --nodaemon --config /etc/btsync/<instance>.conf
+#SYNC_OPTS=""
+
+# Change the user btsync should be run as
+#SYNC_USER="btsync"
+
+# Set the umask btsync should be run as
+#SYNC_UMASK="022"
