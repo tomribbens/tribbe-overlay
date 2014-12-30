@@ -39,7 +39,7 @@ src_install() {
 
 pkg_postinst() {
 	local syncuser="btsync"
-	local syncdir="/home/${syncuser}"
+	local syncdir="/var/cache/${syncuser}"
 
 	# Let's set up the user and group for this daemon so that members of the group
 	# can have write permissions.
